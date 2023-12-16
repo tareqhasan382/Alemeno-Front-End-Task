@@ -1,0 +1,81 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { Link } from "react-router-dom";
+import "./App.css";
+import { useGetCoursesQuery } from "./redux/api/courseApi";
+
+function App() {
+  const { data, isLoading } = useGetCoursesQuery(undefined);
+  const course = data?.data;
+  console.log("course:", course);
+  console.log("loading:", isLoading);
+  return (
+    <>
+      <div className=" items-center bg-green-200 rounded flex justify-center h-full py-10 ">
+        <div>
+          <h1 className=" text-xl font-bold text-center py-4 ">All Courses</h1>
+          <div className=" flex flex-wrap gap-4 items-center justify-center ">
+            {isLoading && (
+              <>
+                <h1 className="text-xl font-bold text-center ">Loading</h1>
+              </>
+            )}
+            {!isLoading &&
+              course?.map((item: any) => (
+                <div key={item._id}>
+                  <div className=" bg-red-300 items-center justify-cente shadow-lg outline outline-gray-300/75 rounded p-5 ">
+                    <div className="bg-white flex items-center justify-center px-5">
+                      <img
+                        src={item?.thumbnail}
+                        alt="thumbnail"
+                        className="w-48 h-48 object-cover mx-auto"
+                      />
+                    </div>
+                    <p className=" flex">Name: {item?.name}</p>
+                    <p>Instructor: {item?.instructor} </p>
+                    <p> {item?.description} </p>
+                    <p>EnrollmentStatus: {item?.enrollmentStatus} </p>
+                    <p>Duration : {item?.duration} </p>
+                    <p>Schedule : {item?.schedule} </p>
+                    <p>Location : {item?.location} </p>
+                    {/* <p>Syllabus: {item?.prerequisites} </p> */}
+                    <div className=" flex">
+                      Pre-requisites :
+                      {item?.prerequisites?.map(
+                        (prerequisite: string, index: any) => (
+                          <div key={index}>
+                            <p>
+                              <span className="flex mr-2">
+                                {prerequisite} ,
+                              </span>
+                            </p>
+                          </div>
+                        )
+                      )}
+                    </div>
+                    <div>
+                      <h2 className="text-xl font-bold">Syllabus</h2>
+                      <div className="list-disc">
+                        {item?.syllabus?.map((item: any) => (
+                          <h2 key={item.week} className="mb-4">
+                            <h3 className="text-lg font-semibold">{`Week ${item.week}: ${item.topic}`}</h3>
+                            <p className="ml-4">{item.content}</p>
+                          </h2>
+                        ))}
+                      </div>
+                    </div>
+                    <Link to={`/teamDetails/${item._id}`}>
+                      <button className=" px-3 py-1 bg-black text-white rounded-lg font-bold mt-3 ">
+                        Details
+                      </button>
+                    </Link>
+                  </div>
+                </div>
+              ))}
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+
+export default App;
