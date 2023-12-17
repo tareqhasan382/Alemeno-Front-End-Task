@@ -10,6 +10,8 @@ const Home = () => {
       </div>
       <div className="px-5 max-w-[1280px] mx-auto">
         <Outlet></Outlet>
+      </div>
+      <div className=" bg-slate-900">
         <Footer />
       </div>
     </div>

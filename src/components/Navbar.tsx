@@ -35,12 +35,12 @@ const Navbar = () => {
           <nav className="max-md:hidden">
             <ul className="flex items-center lg:space-x-10 space-x-7 opacity-70 text-[15px]">
               <li>
-                <Link to="/" className="py-3 inline-block w-full">
+                <Link to="/soon" className="py-3 inline-block w-full">
                   Feature
                 </Link>
               </li>
               <li>
-                <Link to="filters" className="py-3 inline-block w-full">
+                <Link to="soon" className="py-3 inline-block w-full">
                   Filters
                 </Link>
               </li>
@@ -85,7 +85,7 @@ const Navbar = () => {
             </div>
           </div>
 
-          <Link to="/cart">
+          <Link to="/soon">
             <div className="p-2 bg-gray-100 rounded-full">
               <MdOutlineShoppingCart size={20} />
             </div>
@@ -118,12 +118,12 @@ const Navbar = () => {
       >
         <ul className="flex flex-col text-[15px] opacity-75 px-2 ">
           <li>
-            <Link to="/shop" className="py-3 inline-block w-full ">
+            <Link to="/soon" className="py-3 inline-block w-full ">
               Feature
             </Link>
           </li>
           <li>
-            <Link to="/filters" className="py-3 inline-block w-full ">
+            <Link to="/soon" className="py-3 inline-block w-full ">
               Filters
             </Link>
           </li>

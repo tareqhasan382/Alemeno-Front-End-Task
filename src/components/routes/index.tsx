@@ -6,6 +6,7 @@ import Register from "../Register";
 import NotFound from "../NotFound";
 import CourseDetails from "../CourseDetails";
 import UserProfile from "../UserProfile";
+import AddCourse from "../dashboard/AddCourse";
 const routes = createBrowserRouter([
   {
     path: "/",
@@ -30,6 +31,10 @@ const routes = createBrowserRouter([
       {
         path: "/register",
         element: <Register />,
+      },
+      {
+        path: "/soon",
+        element: <AddCourse />,
       },
       {
         path: "*",
