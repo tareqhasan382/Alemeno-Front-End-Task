@@ -1,11 +1,35 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useGetCourseQuery } from "../redux/api/courseApi";
+
+import { isLoggedIn } from "../utils/local-storage";
+import { useEnrollCourseMutation } from "../redux/api/enrollApi";
+import { toast } from "react-toastify";
 const CourseDetails = () => {
+  const navigate = useNavigate();
+  const isLogged = isLoggedIn();
   const { id } = useParams();
   const { data } = useGetCourseQuery(id);
   const course = data?.data;
-  console.log("Course:", course);
+  //console.log("Course:", course);
+  // useEnrollMutation
+  const [enrollCourse, { isLoading }] = useEnrollCourseMutation();
+  //const [login, { isLoading }] = useLoginMutation();
+  const handleEnroll = async () => {
+    const enrollData = await course?._id;
+    // console.log("enroll data:", enrollData);
+    const result = await enrollCourse({ data: enrollData }).unwrap(); // status: 'false'
+    if (result?.status === "true") {
+      navigate("/myprofile");
+      toast.success("Enroll successfully");
+    } else if (result?.status == "false") {
+      toast.error(`${result?.message}`);
+    }
+    // console.log("enroll result:", result);
+  };
+  // console.log(enroll);
+  // console.log(isLoading);
+
   return (
     <div className="flex justify-center items-center py-10">
       <div className=" items-center justify-cente shadow-lg outline outline-gray-300/75 rounded p-5 ">
@@ -46,9 +70,25 @@ const CourseDetails = () => {
           </div>
         </div>
         <div className="px-6 py-4">
-          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-            Enroll Now
-          </button>
+          {isLogged ? (
+            <>
+              <button
+                disabled={isLoading}
+                onClick={handleEnroll}
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              >
+                Enroll Now
+              </button>
+            </>
+          ) : (
+            <>
+              <Link to="/login">
+                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                  Enroll Now
+                </button>
+              </Link>
+            </>
+          )}
         </div>
       </div>
     </div>

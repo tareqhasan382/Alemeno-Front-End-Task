@@ -24,8 +24,9 @@ const Login = () => {
     const result = await login(data).unwrap(); // status: 'false'
     if (result?.status === "true") {
       setToLocalStorage(authKey, result.token);
-      navigate("/");
+      navigate("/myprofile");
       toast.success("user Login successfully");
+      window.location.reload();
       console.log("Result:", result);
     } else if (result?.status == "false") {
       toast.error(`${result?.message}`);

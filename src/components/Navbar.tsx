@@ -14,9 +14,17 @@ const Navbar = () => {
 
   const isLogged = isLoggedIn();
   const handleLogout = () => {
-    removeUserInfo(authKey);
-    toast.success("user Logout successfully");
+    if (isLogged) {
+      removeUserInfo(authKey);
+      toast.success("User logged out successfully");
+      window.location.reload();
+    }
   };
+  // const handleLogout = () => {
+  //   removeUserInfo(authKey);
+  //   toast.success("user Logout successfully");
+  //    window.location.reload(true);
+  // };
   return (
     <div className="px-5 max-w-[1280px] mx-auto">
       <div className="flex items-center justify-between py-4 relative  ">
