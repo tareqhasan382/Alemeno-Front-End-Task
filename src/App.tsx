@@ -10,7 +10,7 @@ function App() {
   // console.log("loading:", isLoading);
   return (
     <>
-      <div className=" items-center bg-green-200 rounded flex justify-center h-full py-10 ">
+      <div className=" items-center rounded flex justify-center h-full py-10 ">
         <div>
           <h1 className=" text-xl font-bold text-center py-4 ">All Courses</h1>
           <div className=" flex flex-wrap gap-4 items-center justify-center ">
@@ -43,7 +43,7 @@ function App() {
                     <p>Location : {item?.location} </p>
 
                     <Link to={`/courseDetails/${item._id}`}>
-                      <button className=" px-3 py-1 bg-black text-white rounded-lg font-bold mt-3 ">
+                      <button className=" px-3 py-1 bg-blue-500 text-white rounded-lg font-bold mt-3 ">
                         Details
                       </button>
                     </Link>

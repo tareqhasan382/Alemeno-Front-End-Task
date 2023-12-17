@@ -92,7 +92,7 @@ const Login = () => {
           <button
             disabled={isLoading}
             type="submit"
-            className=" p-2 border rounded-lg bg-purple-600 text-white border-gray-300 mt-2 mb-4 focus:border-gray-600"
+            className=" p-2 border rounded-lg bg-blue-500 text-white border-gray-300 mt-2 mb-4 focus:border-gray-600"
           >
             Login Now
           </button>
